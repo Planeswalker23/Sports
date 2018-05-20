@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="音乐播放器"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="地图实例集合"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music" />
+
+    <Button
+        android:id="@+id/Dynamic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="实时动态轨迹"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
+    <Button
+        android:id="@+id/musicdemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="音效测试"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Dynamic" />
+    <Button
+            android:text="静态轨迹"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/staticdemo" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/musicdemo" android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    <Button
+            android:text="断签通知"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notification" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/staticdemo" android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    <Button
+            android:text="分享"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonsharepictrue"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/notification"/>
+
+</android.support.constraint.ConstraintLayout>
