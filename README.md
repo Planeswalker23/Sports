@@ -29,3 +29,5 @@
 - MainActivity中的分享按钮：基于Android原生分享实现分享图片至第三方APP的功能。
 
 - GalleryActivity：基于Gallery控件实现图片(运动轨迹)的轮播效果
+
+- 修复了点击通知栏通知不消失的BUG，通过为Notification.Builder()对象添加setAutoCancel(true)属性。

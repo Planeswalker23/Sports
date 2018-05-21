@@ -54,6 +54,7 @@ public class NotificationDemo extends Activity{
 //		builder.setDefaults(Notification.DEFAULT_LIGHTS);//设置指示灯
 //		builder.setDefaults(Notification.DEFAULT_VIBRATE);//设置震动
         builder.setDefaults(Notification.DEFAULT_ALL);//设置指示灯、声音、震动
+        builder.setAutoCancel(true);//设置被点击后自动清除
         Notification notification = builder.build();//4.1以上
         //builder.getNotification();
         manager.notify(notification_ID, notification);//发送通知到通知栏
