@@ -24,5 +24,4 @@
 
 ## 版本1.2
 
-<<<<<<< HEAD
 - MainActivity中的分享按钮：基于Android原生分享实现分享图片至第三方APP的功能。
