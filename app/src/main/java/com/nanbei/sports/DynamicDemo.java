@@ -269,9 +269,9 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                         public void onSnapshotReady(Bitmap snapshot) {
                             String sdCardPath = Environment.getExternalStorageDirectory().getPath();
                             // 图片文件路径
-//                            String filePath = sdCardPath + File.separator + "fyd.png";
-                            String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "fyd.png";
-                            Log.i("tag", filePath + "***********");
+                            String filePath = sdCardPath + File.separator + "fyd.png";
+                            //String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "fyd.png";
+                            //Log.i("tag", filePath + "***********");
                             File file = new File(filePath);
                             FileOutputStream out;
                             try {
@@ -279,8 +279,8 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                                 if (snapshot.compress(Bitmap.CompressFormat.PNG, 100, out)) {
                                     out.flush();
                                     out.close();
+                                    Toast.makeText(context, "运动轨迹保存在:" + filePath, Toast.LENGTH_LONG).show();
                                 }
-                                Toast.makeText(context, "运动轨迹保存在:" + filePath, Toast.LENGTH_LONG).show();
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {

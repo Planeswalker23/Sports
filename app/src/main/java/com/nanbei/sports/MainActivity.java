@@ -1,6 +1,7 @@
 package com.nanbei.sports;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -99,8 +100,9 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 //showLocationShare(2);
                 File file = null;
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator;
-                file = new File(path);
+                //String path =  Environment.getExternalStorageDirectory().getPath() + File.separator;
+                String path = Environment.getExternalStorageDirectory().getPath() + File.separator;
+                file = new File(path + "fyd.png");
                 sharePictrue(file);
             }
         });
@@ -122,13 +124,14 @@ public class MainActivity extends Activity {
             imageUri = Uri.fromFile(file);
         }
         shareIntent.setDataAndType(imageUri, "application/vnd.android.package-archive");
-
+        //通过微信分享
         //ComponentName comp = new ComponentName("com.tencent.mm","com.tencent.mm.ui.tools.ShareToTimeLineUI");
-        //intent.setComponent(comp);
+        //shareIntent.setComponent(comp);
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
         shareIntent.setType("image/*");
         startActivity(Intent.createChooser(shareIntent, "分享到"));
+
     }
 }
 

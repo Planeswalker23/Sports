@@ -24,7 +24,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+            <action android:name="android.intent.action.SEND" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
         <activity android:name=".MusicWebActivity"></activity>
         <activity android:name=".MapActivity"></activity>
         <activity android:name=".DynamicDemo"></activity>
