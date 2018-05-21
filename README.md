@@ -25,14 +25,4 @@
 ## 版本1.2
 
 <<<<<<< HEAD
-- MainActivity中的分享按钮：基于Android原生系统分享实现分享图片至第三方APP的功能。
-=======
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMjYzNTM5MTE0XX0=
--->
->>>>>>> b6a4f08e7826807f43eb02f38acf66be0882fdb4
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg4NzM5ODE3OV19
--->
->>>>>>> c8aca293009fe613011840b4246c1aef433c27fe
+- MainActivity中的分享按钮：基于Android原生分享实现分享图片至第三方APP的功能。
