@@ -22,12 +22,6 @@
 
 - WelCome：基于Handler运行机制，实现启动APP首先进入欢迎界面的功能。
 
-- MainActivity -> 分享按钮：基于Android原生系统分享实现分享图片至第三方APP的功能。
-<<<<<<< HEAD
-=======
+## 版本1.2
 
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMjYzNTM5MTE0XX0=
--->
->>>>>>> b6a4f08e7826807f43eb02f38acf66be0882fdb4
+- MainActivity中的分享按钮：基于Android原生系统分享实现分享图片至第三方APP的功能。

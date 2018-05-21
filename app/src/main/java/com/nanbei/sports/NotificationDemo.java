@@ -8,7 +8,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,7 +27,6 @@ public class NotificationDemo extends Activity{
             @Override
             public void onClick(View view) {
                 sendNotification();
-                Log.i("tag", "发送通知");
             }
         });
         btn_cancle = (Button) findViewById(R.id.btn_cancle);
@@ -36,7 +34,6 @@ public class NotificationDemo extends Activity{
             @Override
             public void onClick(View view) {
                 manager.cancel(notification_ID);//取消已发送的通知
-                Log.i("tag", "取消通知");
             }
         });
     }
@@ -48,7 +45,7 @@ public class NotificationDemo extends Activity{
         PendingIntent pintent = PendingIntent.getActivity(this, 0, intent, 0);
         Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);//设置图标
-        builder.setTicker("hello");//手机状态栏的提示；
+        builder.setTicker("COMEONBRO");//手机状态栏的提示；
         builder.setWhen(System.currentTimeMillis());//设置时间
         builder.setContentTitle("Sports");//设置标题
         builder.setContentText("快点回来打卡继续坚持吧！");//设置通知内容
