@@ -13,14 +13,14 @@ import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.io.File;
 import java.net.URI;
 
 public class MainActivity extends Activity {
+
+    private static Context context;
 
     private Button btMusic;
     private Button btMap;
@@ -29,8 +29,7 @@ public class MainActivity extends Activity {
     private Button btStaticDemo;
     private Button btNotification;
     private Button btSharePictrue;
-
-    private static Context context;
+    private Button btGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +38,16 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //图片轮播器
+        btGallery = (Button) findViewById(R.id.gallery) ;
+        btGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btMusic = (Button) findViewById(R.id.music);
         btMusic.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +140,9 @@ public class MainActivity extends Activity {
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
         shareIntent.setType("image/*");
         startActivity(Intent.createChooser(shareIntent, "分享到"));
-
     }
+
+
 }
 
 
