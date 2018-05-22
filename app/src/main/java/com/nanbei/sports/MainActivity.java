@@ -1,6 +1,7 @@
 package com.nanbei.sports;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity {
     private Button btNotification;
     private Button btSharePictrue;
     private Button btGallery;
+    private Button btCalender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,17 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //日历
+        btCalender = (Button) findViewById(R.id.buttoncalender);
+        btCalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CalenderActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
 
         //图片轮播器
         btGallery = (Button) findViewById(R.id.gallery) ;
@@ -142,7 +155,16 @@ public class MainActivity extends Activity {
         startActivity(Intent.createChooser(shareIntent, "分享到"));
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 2){
+            int cyear = data.getIntExtra("year",0);
+            int cmonth = data.getIntExtra("month", 0);
+            int cday = data.getIntExtra("day", 0);
+            Log.i("tag", cyear + ":" + cmonth + ":" + cday);
+        }
+    }
 }
 
 

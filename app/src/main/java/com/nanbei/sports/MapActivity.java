@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -74,6 +75,8 @@ public class MapActivity extends Activity {
             @Override
             public void onClick(View view) {
                 endPlace = new LatLng(mCurrentLat, mCurrentLon);
+                Toast.makeText(context, "终点位置：" + mCurrentLat + "," + mCurrentLon, Toast.LENGTH_SHORT).show();
+
                 distance = DistanceUtil.getDistance(startPlace, endPlace);
                 String resultdistance = String.format("%.2f", distance / 1000).toString();
                 tvDistance.setText("运动总距离 " + resultdistance  + " km ");
@@ -90,6 +93,7 @@ public class MapActivity extends Activity {
             @Override
             public void onClick(View view) {
                 startPlace = new LatLng(mCurrentLat, mCurrentLon);
+                Toast.makeText(context, "起始位置：" + mCurrentLat + ";" + mCurrentLon, Toast.LENGTH_SHORT).show();
                 startTime = System.currentTimeMillis();//程序开始记录时间
             }
         });
@@ -133,7 +137,7 @@ public class MapActivity extends Activity {
         mLocationClient.registerLocationListener(new MyLocationListenner());//注册监听器
         LocationClientOption option = new LocationClientOption();
         //设置定位模式为GPS模式
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
+        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);

@@ -35,6 +35,8 @@
 
 ## 版本1.3
 
-新增功能：显示运动时间与运动距离。
+新增功能：显示运动时间与运动距离，选择日期。
 
 - MapActivity：基于百度地图工具类DistanceUtil.getDistance()获取运动距离，并使用System.currentTimeMillis()获取时间计算时间差得到运动时间。
+
+- CalenderActivity：基于DatePicker控件实现选择日期功能，并使用startActivityForResult()方法实现参数回传。
