@@ -10,20 +10,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import android.widget.*;
 
 
 import com.baidu.location.*;
 import com.baidu.mapapi.map.*;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapActivity extends Activity {
+
+    //计时相关
+    private long startTime;
+    private long endTime;
+    private long TotalTime;
 
     private Context context;
     private MapView mMapView;
@@ -32,6 +35,8 @@ public class MapActivity extends Activity {
     private Button btMyLocation;
     private Button btStartRun;
     private Button btEndRun;
+    private TextView tvDistance;
+    private TextView tvTime;
 
     //定位相关
     public LocationClient mLocationClient;
@@ -39,6 +44,9 @@ public class MapActivity extends Activity {
     private double mCurrentLon = 0.0;//经度
     private boolean isFirstLocate = true;
     private float mCurrentZoom = 16.0f;//默认地图缩放比例值
+    private double distance = 0.0;//运动距离
+    private LatLng startPlace;
+    private LatLng endPlace;
 
     //封装设备当前所在位置
     private MyLocationData.Builder locationBuilder = new MyLocationData.Builder();
@@ -57,6 +65,34 @@ public class MapActivity extends Activity {
         initMap();//获取地图控件引用
         heatMap();//开启/关闭城市热力图
         moveToMyLocation();//回到我的位置
+        startRun();//开始运动，记录起点坐标
+        endRun();//结束运动
+    }
+
+    private void endRun() {
+        btEndRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                endPlace = new LatLng(mCurrentLat, mCurrentLon);
+                distance = DistanceUtil.getDistance(startPlace, endPlace);
+                String resultdistance = String.format("%.2f", distance / 1000).toString();
+                tvDistance.setText("运动总距离 " + resultdistance  + " km ");
+
+                endTime = System.currentTimeMillis();
+                TotalTime = endTime - startTime;
+                tvTime.setText("运动总时间 " + TotalTime + " ms");
+            }
+        });
+    }
+
+    private void startRun() {
+        btStartRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPlace = new LatLng(mCurrentLat, mCurrentLon);
+                startTime = System.currentTimeMillis();//程序开始记录时间
+            }
+        });
     }
 
     private void moveToMyLocation() {
@@ -113,6 +149,7 @@ public class MapActivity extends Activity {
                 public void run() {
                     mCurrentLat = location.getLatitude();
                     mCurrentLon = location.getLongitude();
+
                 }
             });
             navigeteTo(location);
@@ -149,6 +186,8 @@ public class MapActivity extends Activity {
         this.context = this;
         btStartRun = (Button) findViewById(R.id.startRun);
         btEndRun = (Button) findViewById(R.id.endRun);
+        tvDistance = (TextView) findViewById(R.id.tvdistance);
+        tvTime = (TextView) findViewById(R.id.tvtime);
     }
 
     @Override

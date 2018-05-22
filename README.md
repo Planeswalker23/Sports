@@ -31,3 +31,10 @@
 - GalleryActivity：基于Gallery控件实现图片(运动轨迹)的轮播效果
 
 - 修复了点击通知栏通知不消失的BUG，通过为Notification.Builder()对象添加setAutoCancel(true)属性。
+
+
+## 版本1.3
+
+新增功能：显示运动时间与运动距离。
+
+- MapActivity：基于百度地图工具类DistanceUtil.getDistance()获取运动距离，并使用System.currentTimeMillis()获取时间计算时间差得到运动时间。

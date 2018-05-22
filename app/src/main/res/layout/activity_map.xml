@@ -60,7 +60,20 @@
             android:orientation="horizontal">
 
 
-
+            <TextView
+                    android:text="距离 0 km"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvdistance"
+                    android:layout_weight="1"/>
+            <TextView
+                    android:text="时间 00：00：00"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvtime"
+                    android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
