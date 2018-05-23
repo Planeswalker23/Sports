@@ -42,7 +42,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".GalleryActivity"></activity>
-        <activity android:name=".CalenderActivity"></activity>
+        <activity android:name=".CalendarActivity"
+                  android:theme="@style/translucent">
+        </activity>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"

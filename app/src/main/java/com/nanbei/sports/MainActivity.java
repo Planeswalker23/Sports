@@ -1,12 +1,8 @@
 package com.nanbei.sports;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +13,6 @@ import android.view.View;
 import android.widget.*;
 
 import java.io.File;
-import java.net.URI;
 
 public class MainActivity extends Activity {
 
@@ -46,7 +41,7 @@ public class MainActivity extends Activity {
         btCalender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CalenderActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
@@ -162,7 +157,7 @@ public class MainActivity extends Activity {
             int cyear = data.getIntExtra("year",0);
             int cmonth = data.getIntExtra("month", 0);
             int cday = data.getIntExtra("day", 0);
-            Log.i("tag", cyear + ":" + cmonth + ":" + cday);
+            Log.i("tag", "MainActivity：" + cyear + ":" + cmonth + ":" + cday);
         }
     }
 }
