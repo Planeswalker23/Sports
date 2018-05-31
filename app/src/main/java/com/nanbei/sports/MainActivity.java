@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     private Button btSharePictrue;
     private Button btGallery;
     private Button btCalender;
+    private Button btRegist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,15 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btRegist = (Button) findViewById(R.id.buttonRegist);
+        btRegist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegistActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //日历
         btCalender = (Button) findViewById(R.id.buttoncalender);

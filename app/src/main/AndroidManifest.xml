@@ -45,6 +45,7 @@
         <activity android:name=".CalendarActivity"
                   android:theme="@style/translucent">
         </activity>
+        <activity android:name=".RegistActivity"></activity>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"

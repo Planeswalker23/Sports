@@ -40,3 +40,9 @@
 - MapActivity：基于百度地图工具类DistanceUtil.getDistance()获取运动距离，并使用System.currentTimeMillis()获取时间计算时间差得到运动时间。
 
 - CalenderActivity：基于CalendarView控件实现改变日期功能，并使用startActivityForResult()方法实现参数回传，同时还为Activity添加了半透明样式。
+
+## 版本1.4
+
+新增功能：注册
+
+- RegistActivity：实现注册功能，使用GSON将注册数据封装成JSON格式，并使用OkHttp发送到服务器(尚未实现)。
