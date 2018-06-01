@@ -52,6 +52,11 @@ import java.util.List;
  */
 public class DynamicDemo extends Activity implements SensorEventListener {
 
+    //计时相关
+    private long startTime;
+    private long endTime;
+    private long TotalTime;
+
     // 定位相关
     private LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -319,6 +324,7 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                     info.setText("GPS信号搜索中，请稍后...");
                     mBaiduMap.clear();
                     Toast.makeText(context, "开始运动", Toast.LENGTH_SHORT).show();
+                    startTime = System.currentTimeMillis();//程序开始记录时间
                 }
             }
         });
@@ -334,6 +340,9 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                     progressBarRl.setVisibility(View.GONE);
 
                     Toast.makeText(context, "运动结束", Toast.LENGTH_SHORT).show();
+
+                    endTime = System.currentTimeMillis();
+                    TotalTime = endTime - startTime;
 
                     if (isFirstLoc) {
                         points.clear();

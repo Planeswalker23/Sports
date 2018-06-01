@@ -48,3 +48,23 @@
 - RegistActivity：实现注册功能，使用GSON将注册数据封装成JSON格式，并使用OkHttp发送到服务器。
 
 - LoginActivity：实现登录功能，通过okHttp发送JSON登录数据到服务器，获取返回值判断登录情况。
+
+## 版本1.5
+
+新增功能：每次运动结束后发送数据到服务器。
+
+- RunDateUtil：返回的JSON格式为
+    
+    {  	
+	    "id":"1000",  
+	    "password":"11",  
+	    "sportsType":"跑步",  
+	    "startTime":"2018年06月01日 21:52",  
+	    "totalTime":"1:0",  
+	    "totalDistance":200,  
+	    "calories":14.4,  
+	    "timePerKM":18,  
+	    "stepCount":444,  
+	    "mCurrentLat":12.1,  
+	    "mCurrentLon":121.1  
+	}
