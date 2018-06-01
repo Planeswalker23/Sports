@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     private Button btSharePictrue;
     private Button btGallery;
     private Button btCalender;
-    private Button btRegist;
+    private Button btRegist,btLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,15 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btLogin = (Button) findViewById(R.id.activityLogin);
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btRegist = (Button) findViewById(R.id.buttonRegist);
         btRegist.setOnClickListener(new View.OnClickListener() {

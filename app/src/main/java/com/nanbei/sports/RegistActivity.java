@@ -1,27 +1,33 @@
 package com.nanbei.sports;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import entity.Student;
-import org.junit.Test;
+import entity.User;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import util.HttpUtil;
+
+import java.io.IOException;
 
 public class RegistActivity extends Activity {
 
-    private String url="http://192.168.1.101:8080/SHproject/homepage/register";//服务器接口地址
-    private EditText school,id,name,password;//用户名和密码
+    private String url="http://10.62.17.191:8080/SportServer/register";//服务器接口地址
+    private EditText school,id,name,password,tel;//用户名和密码
     private Button regist;//提交按钮
-    private TextView result;//服务器返回结果
 
-    private Student student = new Student();;
+    private Student student = new Student();
+    private User user = new User();
 
     private static Gson gson = null;
-
-
+    private String userJson = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class RegistActivity extends Activity {
         name = (EditText) findViewById(R.id.editTextName);
         password = (EditText) findViewById(R.id.editTextPassword);
         regist = (Button) findViewById(R.id.buttonRegistByHttp);
+        tel = (EditText) findViewById(R.id.editTextTel);
 
 
 
@@ -40,42 +47,56 @@ public class RegistActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //获取输入的数据
+                String idvalue = id.getText().toString();
                 String namevalue = name.getText().toString();
-                String schoolvalue = name.getText().toString();
-                String idvalue = name.getText().toString();
-                String passwordvalue = name.getText().toString();
-                System.out.println(namevalue);
+                String schoolvalue = school.getText().toString();
+                String passwordvalue = password.getText().toString();
+                String telvalue = tel.getText().toString();
 
                 //set学生对象的值
-                student.setSchool(schoolvalue);
-                student.setId(idvalue);
-                student.setName(namevalue);
-                student.setPassword(passwordvalue);
+                user.setId(idvalue);
+                user.setName(namevalue);
+                user.setPassword(passwordvalue);
+                user.setSchool_name(schoolvalue);
+                user.setTel(telvalue);
 
-                String stuJson = StudentToJson(student);
-                System.out.println(stuJson);
+                //封装JSON格式数据
+                userJson = UserToJson(user);
+                System.out.println(userJson);
 
+                //发送JSON数据到服务器
+                HttpUtil.sendOkHttpRequest(url, userJson, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegistActivity.this, "注册失败，请重试", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(RegistActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Intent intent = new Intent(RegistActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        System.out.println(response.body().string());
+                    }
+                });
             }
         });
-
     }
 
     //数据包装成json
-    public String StudentToJson(Student stu){
+    public String UserToJson(User user){
         gson = new Gson();
-        String json = gson.toJson(stu);
+        String json = gson.toJson(user);
         return json;
-    }
-
-    @Test
-    public void test(){
-        Student student = new Student();
-        //set学生对象的值
-        student.setSchool("台州学院");
-        student.setId("1536200182");
-        student.setName("范逸东");
-        student.setPassword("123");
-        System.out.println(student.toString());
-        System.out.println(StudentToJson(student));
     }
 }

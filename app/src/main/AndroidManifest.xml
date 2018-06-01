@@ -46,6 +46,7 @@
                   android:theme="@style/translucent">
         </activity>
         <activity android:name=".RegistActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
 
         <provider
                 android:name="android.support.v4.content.FileProvider"

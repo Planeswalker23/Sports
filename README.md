@@ -43,6 +43,8 @@
 
 ## 版本1.4
 
-新增功能：注册
+新增功能：注册、登录。
 
-- RegistActivity：实现注册功能，使用GSON将注册数据封装成JSON格式，并使用OkHttp发送到服务器(尚未实现)。
+- RegistActivity：实现注册功能，使用GSON将注册数据封装成JSON格式，并使用OkHttp发送到服务器。
+
+- LoginActivity：实现登录功能，通过okHttp发送JSON登录数据到服务器，获取返回值判断登录情况。
