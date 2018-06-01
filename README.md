@@ -55,16 +55,18 @@
 
 - RunDateUtil：返回的JSON格式为
     
-    {  	
-	    "id":"1000",  
-	    "password":"11",  
-	    "sportsType":"跑步",  
-	    "startTime":"2018年06月01日 21:52",  
-	    "totalTime":"1:0",  
-	    "totalDistance":200,  
-	    "calories":14.4,  
-	    "timePerKM":18,  
-	    "stepCount":444,  
-	    "mCurrentLat":12.1,  
-	    "mCurrentLon":121.1  
-	}
+    ```
+     {  	
+	        "id":"1000",  
+	        "password":"11",  
+	        "sportsType":"跑步",  
+	        "startTime":"2018年06月01日 21:52",  
+	        "totalTime":"1:0",  
+	        "totalDistance":200,  
+	        "calories":14.4,  
+	        "timePerKM":18,  
+	        "stepCount":444,  
+	        "mCurrentLat":12.1,  
+	        "mCurrentLon":121.1  
+	 }
+	```
