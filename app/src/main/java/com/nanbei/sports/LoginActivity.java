@@ -2,14 +2,14 @@ package com.nanbei.sports;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import entity.User;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class LoginActivity extends Activity {
 
-    private String url="http://10.62.17.191:8080/SportServer/login";//服务器接口地址
+    private String url="http://120.79.36.200:8080/SportServer_war/login";//服务器接口地址
     private EditText school,id,password;
 
     private User user = new User();
@@ -41,14 +41,12 @@ public class LoginActivity extends Activity {
         password = (EditText) findViewById(R.id.editTextPassword_Login);
         btLogin = (Button) findViewById(R.id.buttonLogin);
 
-
-
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idvalue = id.getText().toString();
+                final String idvalue = id.getText().toString();
                 String schoolvalue = school.getText().toString();
-                String passwordvalue = password.getText().toString();
+                final String passwordvalue = password.getText().toString();
 
                 //set学生对象的值
                 user.setId(idvalue);
@@ -93,6 +91,7 @@ public class LoginActivity extends Activity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

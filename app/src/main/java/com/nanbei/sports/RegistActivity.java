@@ -2,11 +2,13 @@ package com.nanbei.sports;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.baidu.mapapi.common.SysOSUtil;
 import com.google.gson.Gson;
 import entity.Student;
 import entity.User;
@@ -19,7 +21,7 @@ import java.io.IOException;
 
 public class RegistActivity extends Activity {
 
-    private String url="http://10.62.17.191:8080/SportServer/register";//服务器接口地址
+    private String url="http://120.79.36.200:8080/SportServer_war/register";//服务器接口地址
     private EditText school,id,name,password,tel;//用户名和密码
     private Button regist;//提交按钮
 
@@ -47,10 +49,10 @@ public class RegistActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //获取输入的数据
-                String idvalue = id.getText().toString();
+                final String idvalue = id.getText().toString();
                 String namevalue = name.getText().toString();
                 String schoolvalue = school.getText().toString();
-                String passwordvalue = password.getText().toString();
+                final String passwordvalue = password.getText().toString();
                 String telvalue = tel.getText().toString();
 
                 //set学生对象的值
