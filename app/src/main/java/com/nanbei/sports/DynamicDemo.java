@@ -347,11 +347,11 @@ public class DynamicDemo extends Activity implements SensorEventListener {
 
                     endTime = System.currentTimeMillis();
 
-//                    String json = RunDateUtil.returnAllDate("1", "1", "run", startTime, endTime,
-//                            distance, mCurrentLat, mCurrentLon);
-                    String json = RunDateUtil.returnAllDate("2", "2","run",
-                            System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
-                            200.0, 12.1, 121.1);
+                    String json = RunDateUtil.returnAllDate("1", "1", "run", startTime, endTime,
+                            distance, mCurrentLat, mCurrentLon);
+//                    String json = RunDateUtil.returnAllDate("0", "1111","run",
+//                            System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
+//                            3499.0, 12.1, 121.1);
                     System.out.println(json);
                     String url="http://10.62.17.191:8080/SportServer/receiveRunData";//服务器接口地址
                     HttpUtil.sendOkHttpRequest(url, json, new Callback() {

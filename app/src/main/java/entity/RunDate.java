@@ -12,6 +12,7 @@ public class RunDate {
     private int stepCount;
     private double mCurrentLat;//纬度
     private double mCurrentLon;//经度
+    private int score;//本次运动的积分
 
     public String getId() {
         return id;
@@ -99,5 +100,13 @@ public class RunDate {
 
     public void setmCurrentLon(double mCurrentLon) {
         this.mCurrentLon = mCurrentLon;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

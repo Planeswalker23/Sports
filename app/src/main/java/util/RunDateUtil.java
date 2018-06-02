@@ -21,7 +21,7 @@ public class RunDateUtil {
         SimpleDateFormat sdf  = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         String sTime = sdf.format(startTime);
 
-        double totalTime = (endTime-startTime) / 1000;
+        double totalTime = (endTime-startTime) / 1000;//单位秒
 
         runDate.setId(id);
         runDate.setPassword(password);
@@ -30,10 +30,16 @@ public class RunDateUtil {
         runDate.setTotalTime(totalTime);//单位秒
         runDate.setTotalDistance(Double.parseDouble(df.format(totalDistance)));//单位米
         runDate.setCalories(Double.parseDouble(df.format(CaloriesPerM * totalDistance)));
-        runDate.setTimePerKM(totalTime / totalDistance);
+        if (totalDistance != 0){
+            runDate.setTimePerKM(Double.parseDouble(df.format(1000 * totalTime / totalDistance)));
+        } else {
+            runDate.setTimePerKM(0.0);
+        }
         runDate.setStepCount((int)(totalDistance / MetersPerStep));
         runDate.setmCurrentLat(mCurrentLat);
         runDate.setmCurrentLon(mCurrentLon);
+        //分数
+        runDate.setScore(judgeScore(sportsType, totalDistance, totalTime));
 
         //封装JSON格式数据
         Gson gson = new Gson();
@@ -50,11 +56,27 @@ public class RunDateUtil {
         return timeHHMM;
     }
 
+    public static int judgeScore(String sportsType, double distance, double totaltime){
+        int score = 0;
+        switch (sportsType){
+            case "run":
+                score = (int)(distance / 1000) * 2;
+                break;
+            case "walk":
+                score = (int)(distance / 1000);
+                break;
+            case "ball":
+                score = (int)(totaltime / 1800) * 2;
+                break;
+        }
+        return score;
+    }
+
     @Test
     public void a(){
-        System.out.println(returnAllDate("2", "2","run",
+        System.out.println(returnAllDate("1", "1","ball",
                 System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
-                200.0, 12.1, 121.1));
+                2050.0, 12.1, 121.1));
     }
 
 }

@@ -57,16 +57,23 @@
     
     ```
      {  	
-	        "id":"1000",  
-	        "password":"11",  
-	        "sportsType":"跑步",  
-	        "startTime":"2018年06月01日 21:52",  
-	        "totalTime":"1:0",  
-	        "totalDistance":200,  
-	        "calories":14.4,  
-	        "timePerKM":18,  
-	        "stepCount":444,  
-	        "mCurrentLat":12.1,  
-	        "mCurrentLon":121.1  
+            "calories":14.4,
+            "id":"2",
+            "mCurrentLat":12.1,
+            "mCurrentLon":121.1,
+            "password":"2",
+            "sportsType":"run",
+            "startTime":"2018/06/02 12:08",
+            "stepCount":444,
+            "timePerKM":18,
+            "totalDistance":200,
+            "totalTime":3600
+            "score":0
 	 }
 	```
+	
+## 版本1.6
+
+新增功能：获取用户运动积分及排名
+
+-MainActivity中的获取积分按钮：发送请求到服务器，返回积分及排名。

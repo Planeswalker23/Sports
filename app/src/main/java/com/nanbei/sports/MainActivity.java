@@ -11,8 +11,16 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import com.google.gson.Gson;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import org.json.JSONException;
+import org.json.JSONObject;
+import util.HttpUtil;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -27,7 +35,9 @@ public class MainActivity extends Activity {
     private Button btSharePictrue;
     private Button btGallery;
     private Button btCalender;
-    private Button btRegist,btLogin;
+    private Button btRegist, btLogin, btGetScore;
+
+    private TextView tvShowScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,66 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btGetScore = (Button) findViewById(R.id.buttonGetScore);
+        tvShowScore = (TextView) findViewById(R.id.textViewScore);
+        btGetScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = "1";
+                String url="http://10.62.17.191:8080/SportServer/getRinkingData?id=" + id;//服务器接口地址
+                HttpUtil.sendOkHttpRequest(url, "", new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "获取积分请求失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "获取积分请求成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        //解析返回值
+                        String backcode = response.body().string();
+                        System.out.println("backcode:" + backcode);
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(backcode);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("jsonObject:" + jsonObject);
+                        String id = null;
+                        int score = 0;
+                        int ranking = 0;
+                        try {
+                            id = jsonObject.getString("id");
+                            score = jsonObject.getInt("score");
+                            ranking = jsonObject.getInt("ranking");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        final String finalId = id;
+                        final int finalScore = score;
+                        final int finalRanking = ranking;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvShowScore.setText("id:" + finalId + ";" + "score:" + finalScore + ";" + "ranking:" + finalRanking + ";");
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
         btLogin = (Button) findViewById(R.id.activityLogin);
         btLogin.setOnClickListener(new View.OnClickListener() {
