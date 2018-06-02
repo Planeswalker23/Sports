@@ -10,15 +10,15 @@ import java.text.SimpleDateFormat;
 
 public class RunDateUtil {
 
-    public String returnAllDate(String id, String password, String sportsType,
-                                    long startTime, long endTime, double totalDistance,
-                                    double mCurrentLat, double mCurrentLon) {
+    public static String returnAllDate(String id, String password, String sportsType,
+                                       long startTime, long endTime, double totalDistance,
+                                       double mCurrentLat, double mCurrentLon) {
         double CaloriesPerM = 0.072;
         double MetersPerStep = 0.45;
         String RunDateJson = null;
         RunDate runDate = new RunDate();
-        DecimalFormat df = new java.text.DecimalFormat("#.00");
-        SimpleDateFormat sdf  = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        DecimalFormat df = new DecimalFormat("#.00");
+        SimpleDateFormat sdf  = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         String sTime = sdf.format(startTime);
 
         double totalTime = (endTime-startTime) / 1000;
@@ -42,7 +42,7 @@ public class RunDateUtil {
         return RunDateJson;
     }
 
-    public String toTimeMMHH(double totalTime){
+    public static String toTimeMMHH(double totalTime){
         String timeHHMM = null;
         int h = (int)(totalTime / 3600);
         int m = (int)((totalTime % 3600) / 60);
@@ -51,9 +51,10 @@ public class RunDateUtil {
     }
 
     @Test
-    public void Test() {
-        System.out.println(returnAllDate("1000", "11","跑步",
+    public void a(){
+        System.out.println(returnAllDate("2", "2","run",
                 System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
                 200.0, 12.1, 121.1));
     }
+
 }

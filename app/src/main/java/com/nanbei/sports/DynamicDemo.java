@@ -38,6 +38,11 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import util.HttpUtil;
+import util.RunDateUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +60,6 @@ public class DynamicDemo extends Activity implements SensorEventListener {
     //计时相关
     private long startTime;
     private long endTime;
-    private long TotalTime;
 
     // 定位相关
     private LocationClient mLocClient;
@@ -342,7 +346,37 @@ public class DynamicDemo extends Activity implements SensorEventListener {
                     Toast.makeText(context, "运动结束", Toast.LENGTH_SHORT).show();
 
                     endTime = System.currentTimeMillis();
-                    TotalTime = endTime - startTime;
+
+//                    String json = RunDateUtil.returnAllDate("1", "1", "run", startTime, endTime,
+//                            distance, mCurrentLat, mCurrentLon);
+                    String json = RunDateUtil.returnAllDate("2", "2","run",
+                            System.currentTimeMillis() + 3600 * 1000, System.currentTimeMillis() + 2*3600*1000,
+                            200.0, 12.1, 121.1);
+                    System.out.println(json);
+                    String url="http://10.62.17.191:8080/SportServer/receiveRunData";//服务器接口地址
+                    HttpUtil.sendOkHttpRequest(url, json, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(DynamicDemo.this, "发送数据失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(DynamicDemo.this, "发送数据成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            System.out.println(response.body().string());
+                        }
+                    });
+
 
                     if (isFirstLoc) {
                         points.clear();
