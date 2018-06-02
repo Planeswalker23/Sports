@@ -5,7 +5,7 @@ public class RunDate {
     private String password;
     private String sportsType;
     private String startTime;
-    private String totalTime;
+    private double totalTime;
     private double totalDistance;
     private double calories;
     private double timePerKM;
@@ -45,11 +45,11 @@ public class RunDate {
         this.startTime = startTime;
     }
 
-    public String getTotalTime() {
+    public double getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(String totalTime) {
+    public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 

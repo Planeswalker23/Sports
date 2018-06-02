@@ -27,7 +27,7 @@ public class RunDateUtil {
         runDate.setPassword(password);
         runDate.setSportsType(sportsType);
         runDate.setStartTime(sTime);
-        runDate.setTotalTime(toTimeMMHH(totalTime));//单位秒
+        runDate.setTotalTime(totalTime);//单位秒
         runDate.setTotalDistance(Double.parseDouble(df.format(totalDistance)));//单位米
         runDate.setCalories(Double.parseDouble(df.format(CaloriesPerM * totalDistance)));
         runDate.setTimePerKM(totalTime / totalDistance);
