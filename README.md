@@ -78,4 +78,4 @@
 
 - MainActivity中的获取积分按钮：发送请求到服务器，返回积分及排名。
 
-- MainActivity中的区域截图按钮：Bitmap.createBitmap (Bitmap source, int x, int y, int width, int height)方法实现区域截图。
+- MainActivity中的区域截图按钮：使用Bitmap.createBitmap (Bitmap source, int x, int y, int width, int height)方法实现区域截图。
