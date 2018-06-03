@@ -74,8 +74,10 @@
 	
 ## 版本1.6
 
-新增功能：获取用户运动积分及排名、区域截图
+新增功能：获取用户运动积分及排名、区域截图、从服务器请求image的URL
 
 - MainActivity中的获取积分按钮：发送请求到服务器，返回积分及排名。
 
 - MainActivity中的区域截图按钮：使用Bitmap.createBitmap (Bitmap source, int x, int y, int width, int height)方法实现区域截图。
+
+- HttpUtil中的getImageURLFromJson()方法：对服务器发起一次请求，从返回的JSON数据中读取图片的URL连接，然后解析生成图片，作为分享运动成果的背景。

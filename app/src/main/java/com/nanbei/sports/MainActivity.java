@@ -23,7 +23,6 @@ import org.json.JSONObject;
 import util.HttpUtil;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -43,6 +42,7 @@ public class MainActivity extends Activity {
     private Button btRegist, btLogin, btGetScore, btPartScreenShots;
 
     private TextView tvShowScore;
+    private final int WRITE_PERMISSION = 0x01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
+                    requestWritePermission();
                     Bitmap bitmap = getBitmap(findViewById(R.id.pingmu));
                     //sd卡路径
                     String sdCardPath = Environment.getExternalStorageDirectory().getPath();
@@ -298,6 +299,12 @@ public class MainActivity extends Activity {
             bitmap = Bitmap.createBitmap(bitmap, viewLocationArray[0], viewLocationArray[1], outWidth, outHeight);
         }
         return bitmap;
+    }
+
+    private void requestWritePermission(){
+        if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},WRITE_PERMISSION);
+        }
     }
 }
 
