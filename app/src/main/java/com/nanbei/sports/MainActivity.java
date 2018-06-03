@@ -1,17 +1,20 @@
 package com.nanbei.sports;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import com.google.gson.Gson;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -20,6 +23,8 @@ import org.json.JSONObject;
 import util.HttpUtil;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends Activity {
@@ -35,7 +40,7 @@ public class MainActivity extends Activity {
     private Button btSharePictrue;
     private Button btGallery;
     private Button btCalender;
-    private Button btRegist, btLogin, btGetScore;
+    private Button btRegist, btLogin, btGetScore, btPartScreenShots;
 
     private TextView tvShowScore;
 
@@ -46,6 +51,25 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btPartScreenShots = (Button) findViewById(R.id.buttonPartScreensShots);
+        btPartScreenShots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Bitmap bitmap = getBitmap(findViewById(R.id.pingmu));
+                    //sd卡路径
+                    String sdCardPath = Environment.getExternalStorageDirectory().getPath();
+                    FileOutputStream fout = new FileOutputStream(sdCardPath + File.separator + "part.png");
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fout);
+                    System.out.println("xxxxx" + "截图成功");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    view.setDrawingCacheEnabled(false);
+                }
+            }
+        });
 
         btGetScore = (Button) findViewById(R.id.buttonGetScore);
         tvShowScore = (TextView) findViewById(R.id.textViewScore);
@@ -248,6 +272,32 @@ public class MainActivity extends Activity {
             int cday = data.getIntExtra("day", 0);
             Log.i("tag", "MainActivity：" + cyear + ":" + cmonth + ":" + cday);
         }
+    }
+
+    /**
+     *
+     * @param view 需要截取图片的view
+     * @return 截图
+     */
+    private Bitmap getBitmap(View view) throws Exception {
+
+        View screenView = getWindow().getDecorView();
+        screenView.setDrawingCacheEnabled(true);
+        screenView.buildDrawingCache();
+
+        //获取屏幕整张图片
+        Bitmap bitmap = screenView.getDrawingCache();
+        if (bitmap != null) {
+            //需要截取的长和宽
+            int outWidth = view.getWidth();
+            int outHeight = view.getHeight();
+            //获取需要截图部分的在屏幕上的坐标(view的左上角坐标）
+            int[] viewLocationArray = new int[2];
+            view.getLocationOnScreen(viewLocationArray);
+            //从屏幕整张图片中截取指定区域
+            bitmap = Bitmap.createBitmap(bitmap, viewLocationArray[0], viewLocationArray[1], outWidth, outHeight);
+        }
+        return bitmap;
     }
 }
 
