@@ -57,7 +57,10 @@ public class NotificationDemo extends Activity{
         builder.setAutoCancel(true);//设置被点击后自动清除
         Notification notification = builder.build();//4.1以上
         //builder.getNotification();
+
+        //定时发送通知
         manager.notify(notification_ID, notification);//发送通知到通知栏
+
     }
 }
 
